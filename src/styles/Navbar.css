@@ -1,0 +1,39 @@
+.nav-body{
+    background-color: #FFFFFF;
+    /* width: 1440px; */
+    /* height: 106px; */
+}
+
+/* Input styles */
+
+.nav-input{
+    width: 583px;
+    height: 40px;
+}
+
+.nav-input-body{
+    width: 713;
+    height: 40px;
+}
+
+.drop-body{
+    position: relative;
+}
+
+.nav-dropdown{
+    /* transform: rotate(360deg); */
+    transition: 0.5s ease;
+    width: 25px;
+    cursor: pointer;
+}
+
+/* .nav-dropdown-content{
+    position: absolute;
+    /* width: 10rem; */
+    /* right: -6rem; */
+    /* border: 2px solid #db9200; */
+    /* border-radius: 10px; */
+    /* padding: 1rem; */
+    /* background-color: #db9200; */
+    /* z-index: 1; */
+ /* }  */

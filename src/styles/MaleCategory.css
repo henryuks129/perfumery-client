@@ -1,0 +1,35 @@
+.mapped-data-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.mapped-images {
+  /* width: 349px; */
+  /* height: 357px; */
+}
+
+.combo-body {
+  /* height: 758px; */
+}
+
+.home-favourite {
+  /* position: relative; */
+}
+
+.relative {
+  position: relative;
+}
+
+.heart-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+}
+
+/* .heart-circle{
+    position: absolute;
+    top: 0;
+    right: 0;
+} */
