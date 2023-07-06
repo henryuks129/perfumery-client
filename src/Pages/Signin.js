@@ -1,56 +1,64 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import Header from '../Layouts/Header';
 import '../styles/Signin.css';
+import axios from 'axios';
 
-const Schema = yup.object().shape({
-  Email: yup.string().email().required(),
-  Password: yup.string().min(3).max(20).required(),
-})
+// const Schema = yup.object().shape({
+//   Email: yup.string().email().required(),
+//   Password: yup.string().min(3).max(20).required
+// }
 
 const Signin = () => {
-  const navigate = useNavigate();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({resolver: yupResolver(Schema)});
+  const [email,setEmail] = useState('')
+  const [password,setpassword] = useState('')
+  const navigate = useNavigate()
+  // http://localhost:7878/auth/login
 
-  const submitForm = (data) =>{
+  const Login = async (e)=>{
+    e.preventDefault()
+    const logData = {
+      email,
+      password,
+    }
+
+    if( !email || !password ){
+        alert('please fill all fields')
+      }
+    if(  email ||password ){
+        alert('logged in')
+
+    }
+    try {
+      const res =  await axios.post('http://localhost:7878/auth/login',logData)
+      navigate('/')
+      
+    } catch (error) {
+      console.log(error);
+      
+    }
 
   }
-
+    <div>
   return (
     <div>
-      <Header/>
-      <div className='container sigin-body mt-5'>
-        <div className='signin-home-body'>
-        <div className='text-center'>
-          <h1 className='signin-header'>Sign Into Your Account</h1>
-          <p className='signin-text mt-4 mb-4'>Sign In with Your Email and Password</p>
-        </div>
-        <form action="" method='POST'>
-          <label htmlFor="">Email</label><br/>
-          <input type='email' id='email' name='Email' {...register('Email', {required: true})} placeholder='Placeholder' className='input-body'/>
-          <p className='mb-3'>{errors.Email?.message}</p>
-      <label htmlFor=''>Password</label><br/>
-      <input type='password' id='password' name='Password' {...register('Password', { required: true })} placeholder='Placeholder' className='input-body'/>
-      <p className='mb-3'>{errors.Password?.message}</p>
-        </form>
-        <div>
-          <p className='text-decoration-underline mb-4' onClick={()=>{navigate('/ForgottenPassword')}}>Forgot password?</p>
-          <input type="checkbox" />
-          <label htmlFor="">Remember me (optional)</label>
-          <p className='legal-statement-text mb-4 mt-1'>By providing my information, I agree to Fame Perfumery's <span className='text-decoration-underline'>Privacy Providing and Legal Statement</span></p>
-        </div>
-        <button className='signin-button border-0' onClick={handleSubmit(submitForm)}>Sign In</button>
-        </div>
-      </div>
+      {/* <NavbarAccent /> */}
+      <form className="w-50 m-auto" >
+        <label htmlFor="email">Email:</label><br />
+        <input onChange={(e)=> setEmail(e.target.value) } value={email} className="w-100 rounded-pill border border-2 border-success" type="email" name="" id="email" /><br /><br />
+        <label htmlFor="password">Password:</label><br />
+        <input onChange={(e)=> setpassword(e.target.value) }  value={password} className="w-100 rounded-pill border border-2 border-success"  type="password" name="" id="password" /><br /><br />
+      
+        <input className="btn btn-primary" type="submit" value="Register" onClick={Login}/>
+      </form>
+  
     </div>
-  )
+  );
+    </div>
+
 }
 
 export default Signin

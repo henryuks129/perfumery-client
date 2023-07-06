@@ -1,4 +1,4 @@
-import React,{ useState,useEffect } from 'react';
+import React,{ useState,useEffect,useContext } from 'react';
 import useFetch from '../Hooks/useFetch';
 import ClipLoader from "react-spinners/ClipLoader";
 import starticon from '../assets/staricon.svg';
@@ -11,8 +11,10 @@ import nairasign from '../assets/nairasign.svg';
 import favouriteicon from '../assets/favouriteicon.svg';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import CartContext from "../Hooks/CartContext";
 
 const ComboPackageCategory = () => {
+    const { handleAddToCart,cartItem } = useContext(CartContext);
     const {data:data3,loading:loading3,error:error3} = useFetch('https://perfumery-server.onrender.com/stores/category/Combo%20Packages');
     const notify = () => {
         toast("An item has been added to cart", {
@@ -53,7 +55,10 @@ const ComboPackageCategory = () => {
                                     <p className='pt-3'>50 Reviews</p>
                                 </div>
                                 <div className='d-flex justify-content-between mb-2'>
-                                    <button className='rounded-pill buy-btn'>Buy Now</button>
+                                    <button className='rounded-pill buy-btn' onClick={() => {
+                        handleAddToCart(datum);
+                        notify();
+                      }}>Buy Now</button>
                                     <ToastContainer />
                                     <img src={cart} alt="" />
                                 </div>

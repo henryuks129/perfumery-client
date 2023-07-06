@@ -10,6 +10,9 @@ import Signup from './Pages/Signup';
 import Signin from './Pages/Signin';
 import PasswordReset from './Pages/PasswordReset';
 import ForgottenPassword from './Pages/ForgottenPassword';
+import axios from 'axios';
+
+// axios.defaults.withCredentials = true
 
 function App() {
   return (

@@ -10,7 +10,7 @@ import usericon from "../assets/usericon.svg";
 import CartContext from "../Hooks/CartContext";
 
 const Navbar = () => {
-  const { cartItem } = useContext(CartContext);
+  const { cartItem,loggedIn } = useContext(CartContext);
   const navigate = useNavigate();
   const [dropdown, setDropDown] = useState(false);
   // useEffect(()=>{

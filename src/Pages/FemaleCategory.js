@@ -11,6 +11,7 @@ import nairasign from '../assets/nairasign.svg';
 import favouriteicon from '../assets/favouriteicon.svg';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import CartContext from "../Hooks/CartContext";
 
 const FemaleCategory = () => {
     const {data:data2,loading:loading2,error:error2} = useFetch('https://perfumery-server.onrender.com/stores/category/Female');

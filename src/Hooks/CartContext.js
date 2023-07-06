@@ -1,10 +1,20 @@
-import React,{useState,createContext,useEffect} from 'react'
+import React,{useState,createContext,useEffect} from 'react';
+import axios from 'axios';
 
 const cartItemsFromLocalStorage = JSON.parse(localStorage.getItem('cartItem')) || [];
 const CartContext = createContext();
 
 export const CartProvider = ({children})=>{
+    const [loggedIn,setLoggedIn] = useState(undefined)
+    async function getLoggedIn(){
+        const loggedInRes = await axios.get('')
+        setLoggedIn(loggedInRes.data)
+    }
     const [cartItem,setCartItem] = useState(cartItemsFromLocalStorage);
+    useEffect(()=>{
+        localStorage.setItem("cartItem",JSON.stringify(cartItem));
+        getLoggedIn()
+    },[cartItem])
     // const [total,setTotal] = useState(0);
     let handleAddToCart = (product)=>{
         const item = cartItem.find((singleItem)=>singleItem._id === product._id);
@@ -34,7 +44,7 @@ export const CartProvider = ({children})=>{
         localStorage.setItem('cartItem',JSON.stringify(cartItem))
     },[cartItem])
     return(
-        <CartContext.Provider value={{cartItem,handleAddToCart,handleIncrease,handleDecrease}}>
+        <CartContext.Provider value={{cartItem,handleAddToCart,handleIncrease,handleDecrease,loggedIn,getLoggedIn}}>
             {children}
         </CartContext.Provider>
     )
