@@ -26,11 +26,11 @@ const Signin = () => {
   return (
     <div>
       <Header/>
-      <div className='container sigin-body'>
+      <div className='container sigin-body mt-5'>
         <div className='signin-home-body'>
         <div className='text-center'>
-          <h1>Sign Into Your Account</h1>
-          <p>Sign In with Your Email and Password</p>
+          <h1 className='signin-header'>Sign Into Your Account</h1>
+          <p className='signin-text mt-4 mb-4'>Sign In with Your Email and Password</p>
         </div>
         <form action="" method='POST'>
           <label htmlFor="">Email</label><br/>
@@ -41,10 +41,10 @@ const Signin = () => {
       <p className='mb-3'>{errors.Password?.message}</p>
         </form>
         <div>
-          <p className='text-decoration-underline' onClick={()=>{navigate('/ForgottenPassword')}}>Forgot password?</p>
+          <p className='text-decoration-underline mb-4' onClick={()=>{navigate('/ForgottenPassword')}}>Forgot password?</p>
           <input type="checkbox" />
           <label htmlFor="">Remember me (optional)</label>
-          <p>By providing my information, I agree to Fame Perfumery's <span className='text-decoration-underline'>Privacy Providing and Legal Statement</span></p>
+          <p className='legal-statement-text mb-4 mt-1'>By providing my information, I agree to Fame Perfumery's <span className='text-decoration-underline'>Privacy Providing and Legal Statement</span></p>
         </div>
         <button className='signin-button border-0' onClick={handleSubmit(submitForm)}>Sign In</button>
         </div>

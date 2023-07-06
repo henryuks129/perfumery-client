@@ -9,9 +9,16 @@ import hearticon from '../assets/hearticon.svg';
 import heartcircle from '../assets/heartcircle.svg';
 import nairasign from '../assets/nairasign.svg';
 import favouriteicon from '../assets/favouriteicon.svg';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const FemaleCategory = () => {
     const {data:data2,loading:loading2,error:error2} = useFetch('https://perfumery-server.onrender.com/stores/category/Female');
+    const notify = () => {
+        toast("An item has been added to cart", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      };
   return (
     <div className='mt-5'>
         <div className='bg-white rounded combo-body w-100'>
@@ -46,7 +53,8 @@ const FemaleCategory = () => {
                                         <p>50 Reviews</p>
                                     </div>
                                     <div className='d-flex justify-content-between'>
-                                        <button>Buy Now</button>
+                                        <button className='btn rounded-pill buy-btn'>Buy Now</button>
+                                        <ToastContainer />
                                         <img src={cart} alt="" />
                                     </div>
                                     </div>

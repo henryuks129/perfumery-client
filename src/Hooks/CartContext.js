@@ -7,26 +7,26 @@ export const CartProvider = ({children})=>{
     const [cartItem,setCartItem] = useState(cartItemsFromLocalStorage);
     // const [total,setTotal] = useState(0);
     let handleAddToCart = (product)=>{
-        const item = cartItem.find((singleItem)=>singleItem.id === product.id);
+        const item = cartItem.find((singleItem)=>singleItem._id === product._id);
         if(item){
-            setCartItem(cartItem.map((oneItem)=>oneItem.id === product.id ? {...item,quantity:item.quantity + 1} : oneItem))
+            setCartItem(cartItem.map((oneItem)=>oneItem._id === product._id ? {...item,quantity:item.quantity + 1} : oneItem))
         } else{
             setCartItem([...cartItem, {...product,quantity:1}])
         }
     }
     // function for increase and decrease
     function handleIncrease(product){
-        const item = cartItem.find((singleItem)=>singleItem.id === product.id)
+        const item = cartItem.find((singleItem)=>singleItem._id === product._id)
         if(item){
-            setCartItem(cartItem.map((oneItem)=>oneItem.id === product.id ? {...item, quantity:item.quantity + 1} : oneItem))
+            setCartItem(cartItem.map((oneItem)=>oneItem._id === product._id ? {...item, quantity:item.quantity + 1} : oneItem))
         }
     }
     function handleDecrease(product){
-        const item = cartItem.find((singleItem)=>singleItem.id === product.id);
+        const item = cartItem.find((singleItem)=>singleItem._id === product._id);
         if(item.quantity === 1){
-            setCartItem(cartItem.filter((oneItem)=>oneItem.id !== product.id))
+            setCartItem(cartItem.filter((oneItem)=>oneItem._id !== product._id))
         } else{
-            setCartItem(cartItem.map((items)=>items.id === product.id ? {...item,quantity:item.quantity - 1} : items))
+            setCartItem(cartItem.map((items)=>items._id === product._id ? {...item,quantity:item.quantity - 1} : items))
         }
     }
     

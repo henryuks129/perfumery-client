@@ -9,9 +9,16 @@ import hearticon from '../assets/hearticon.svg';
 import heartcircle from '../assets/heartcircle.svg';
 import nairasign from '../assets/nairasign.svg';
 import favouriteicon from '../assets/favouriteicon.svg';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ComboPackageCategory = () => {
     const {data:data3,loading:loading3,error:error3} = useFetch('https://perfumery-server.onrender.com/stores/category/Combo%20Packages');
+    const notify = () => {
+        toast("An item has been added to cart", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      };
   return (
     <div className='mt-5'>
         {/* <div> */}
@@ -46,7 +53,8 @@ const ComboPackageCategory = () => {
                                     <p className='pt-3'>50 Reviews</p>
                                 </div>
                                 <div className='d-flex justify-content-between mb-2'>
-                                    <button className='rounded-pill'>Buy Now</button>
+                                    <button className='rounded-pill buy-btn'>Buy Now</button>
+                                    <ToastContainer />
                                     <img src={cart} alt="" />
                                 </div>
                                 </div>

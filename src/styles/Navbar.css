@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 .nav-body{
     background-color: #FFFFFF;
     /* width: 1440px; */
@@ -9,11 +11,23 @@
 .nav-input{
     width: 583px;
     height: 40px;
+    border-radius: 17px;
+    border: 1px solid #DB9200;
+    padding: 9px 12px 9px 30px;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+    color: rgba(8, 10, 12, 0.50);
+    
 }
 
 .nav-input-body{
     width: 713;
     height: 40px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
 .drop-body{
@@ -37,3 +51,22 @@
     /* background-color: #db9200; */
     /* z-index: 1; */
  /* }  */
+
+ .search-button{
+    position: absolute;
+    left: 9px;
+    width: 21px;
+    height: 21px;
+    top: 12px;
+ }
+
+ .button-search{
+    background: #DB9200;
+    border-radius: 15px;
+    padding: 9px 32px;
+    color: #FFF;
+    font-size: 18px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    line-height: 22px;
+ }

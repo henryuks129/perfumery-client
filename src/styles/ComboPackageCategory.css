@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 .mapped-data-container{
     display: grid;
     grid-template-columns: repeat(4,1fr);
@@ -29,3 +31,12 @@
     bottom: 13.8rem;
     right: 0.5rem;
 }
+
+.buy-btn{
+    background: var(--primary, #DB9200);
+    padding: 12px 61px;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+    font-family: 'Inter', sans-serif;
+  }

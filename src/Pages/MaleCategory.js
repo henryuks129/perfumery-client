@@ -15,7 +15,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const MaleCategory = () => {
-  const { handleAddToCart } = useContext(CartContext);
+  const { handleAddToCart,cartItem } = useContext(CartContext);
+  // const cartItemAmount = cartItem[_id];
   const {
     data: data1,
     loading: loading1,
@@ -65,7 +66,7 @@ const MaleCategory = () => {
                         handleAddToCart(datum);
                         notify();
                       }}
-                      className="btn rounded-pill"
+                      className="btn rounded-pill buy-btn"
                     >
                       Buy Now
                     </button>

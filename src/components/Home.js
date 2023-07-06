@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useContext,useState} from 'react';
 import '../styles/Home.css';
 import Carousel from 'react-bootstrap/Carousel';
 import { useNavigate } from 'react-router-dom';
@@ -15,9 +15,11 @@ import MaleCategory from '../Pages/MaleCategory';
 import FemaleCategory from '../Pages/FemaleCategory';
 import Navbar from '../Layouts/Navbar';
 import Footer from '../Layouts/Footer';
+import "react-toastify/dist/ReactToastify.css";
 
 const Home = () => {
   const navigate = useNavigate();
+  // const {cartItem} = useContext();
   return (
     <div className=''>
       <Navbar/>
@@ -39,7 +41,7 @@ const Home = () => {
           </div>
         </div>
         <div className='col-lg-7'>
-          {/* <Carousel>
+          <Carousel>
       <Carousel.Item>
         <img
           className="d-block w-100"
@@ -77,18 +79,18 @@ const Home = () => {
           </p>
         </Carousel.Caption>
       </Carousel.Item>
-    </Carousel> */}
+    </Carousel>
         </div>
-        <div className='col-lg-3 home-image-section'>
-          {/* <div className='home-image-section'> */}
+        <div className='col-lg-3'>
+          <div className='home-image-section'>
             <img src={scentedcandles} alt="" className='w-100 img-fluid'/>
             <img src={deodorants} alt="" className='w-100 img-fluid'/>
             <img src={glaciers} alt="" className='w-100 img-fluid'/>
             <img src={armaf} alt="" className='w-100 img-fluid'/>
-          {/* </div> */}
+          </div>
         </div>
       </div>
-      <div className='d-flex gap-5 mt-5'>
+      <div className='d-flex justify-content-between w-100 mt-5'>
         <div className='d-inline-flex'>
           <img src={vector1} alt="" />
           <div>
