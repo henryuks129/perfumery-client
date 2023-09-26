@@ -1,16 +1,18 @@
 import React, { useContext, useState, useEffect } from "react";
 import "../styles/Navbar.css";
 import searchicon from "../assets/searchimage.svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 import carticon from "../assets/carticon.svg";
 import navimage from "../assets/navimage.svg";
 import notificationicon from "../assets/notificationicon.svg";
 import dropdownicon from "../assets/dropdownicon.svg";
 import usericon from "../assets/usericon.svg";
 import CartContext from "../Hooks/CartContext";
+import Signin from "../Pages/Signin";
+import Signup from "../Pages/Signup";
 
 const Navbar = () => {
-  const { cartItem,loggedIn } = useContext(CartContext);
+  const { cartItem,loggedIn,logout } = useContext(CartContext);
   const navigate = useNavigate();
   const [dropdown, setDropDown] = useState(false);
   // useEffect(()=>{
@@ -64,8 +66,10 @@ const Navbar = () => {
                     navigate("/Cart");
                   }}
                 />
-                <div>
-                  <p>{cartItem.length >= 1 && <div>{cartItem.item}</div>}</p>
+                <div className="bg-danger rounded-pill h-50 m-auto w-100">
+                  <p>{cartItem.length >= 1 && (
+                    <span>{cartItem.length}</span>
+                  )}</p>
                 </div>
               </div>
               <img src={notificationicon} alt="" />
@@ -75,7 +79,26 @@ const Navbar = () => {
                   <img src={dropdownicon} className="nav-dropdown" alt="" />
                 </div>
                 <div className="nav-dropdown-content">
-                  {dropdown && (
+                {
+                loggedIn ? <div> 
+                  <button onClick={logout}>log out</button>
+                  <Link onClick={logout} className="btn btn-success w-100 mb-3">log out</Link>
+                  <Link to='/Order' className="btn btn-success w-100">Order</Link> 
+                   <button>order</button>
+                </div> : <div>
+                <button className="sign-in" onClick={Signin}>
+              <Link to="/Signin" className="text-decoration-none text-black">
+                Sign In
+              </Link>
+            </button>
+            <button className="sign-up mt-3" onClick={Signup}>
+              <Link to="/Signup" className="text-decoration-none text-black">
+                Sign Up
+              </Link>
+            </button>
+              </div> 
+              }
+                  {/* {dropdown && (
                     <div className="bg-danger p-3 ">
                       <div>
                         <button
@@ -93,9 +116,9 @@ const Navbar = () => {
                         >
                           Sign Up
                         </button>
-                      </div>{" "}
+                      </div>
                     </div>
-                  )}
+                  )} */}
                 </div>
               </div>
             </div>

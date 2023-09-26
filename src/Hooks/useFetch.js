@@ -12,7 +12,7 @@ let fetchedData = async ()=>{
         setData(response);
         console.log(response);
     }catch(error){
-        // console.log(error);
+        console.log(error);
     }finally{
         setLoading(false);
     }

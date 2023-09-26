@@ -1,3 +1,21 @@
 .cart-button{
     left: 447px;
 }
+
+.cart-mapped-image{
+    width: 57.23px;
+    /* height: 98px; */
+}
+
+.remove-text{
+    cursor:pointer;
+}
+
+.mapped-body{
+    width: 775px;
+    /* height: 501px; */
+}
+
+.cart{
+    /* height: 501px; */
+}

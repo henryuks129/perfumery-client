@@ -1,4 +1,4 @@
-import React,{ useState,useEffect } from 'react';
+import React,{ useState,useEffect,useContext } from 'react';
 import useFetch from '../Hooks/useFetch';
 import ClipLoader from "react-spinners/ClipLoader";
 import starticon from '../assets/staricon.svg';
@@ -14,6 +14,7 @@ import "react-toastify/dist/ReactToastify.css";
 import CartContext from "../Hooks/CartContext";
 
 const FemaleCategory = () => {
+    const { handleAddToCart,cartItem } = useContext(CartContext);
     const {data:data2,loading:loading2,error:error2} = useFetch('https://perfumery-server.onrender.com/stores/category/Female');
     const notify = () => {
         toast("An item has been added to cart", {
@@ -30,7 +31,7 @@ const FemaleCategory = () => {
                         <img src={arrow} alt="" />
                     </div>
                 </div>
-                {loading2 && <ClipLoader color={'teal'} size={'300'}/>}
+                {loading2 && <ClipLoader color={'teal'} size={'150'} className='d-flex justify-content-center'/>}
                     {error2 && <h2>{error2.message}</h2>}
                 <div className='mapped-data-container shadow p-4'>
                 {data2.map(
@@ -54,7 +55,7 @@ const FemaleCategory = () => {
                                         <p>50 Reviews</p>
                                     </div>
                                     <div className='d-flex justify-content-between'>
-                                        <button className='btn rounded-pill buy-btn'>Buy Now</button>
+                                        <button onClick={() =>{handleAddToCart(datum); notify();}} className='btn rounded-pill buy-btn'>Buy Now</button>
                                         <ToastContainer />
                                         <img src={cart} alt="" />
                                     </div>

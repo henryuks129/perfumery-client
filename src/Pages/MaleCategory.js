@@ -37,7 +37,7 @@ const MaleCategory = () => {
             <img src={arrow} alt="" />
           </div>
         </div>
-        {loading1 && <ClipLoader color={"teal"} size={"300"} />}
+        {loading1 && <ClipLoader color={"teal"} size={"150"} />}
         {error1 && <h2>{error1.message}</h2>}
         <div className="mapped-data-container shadow p-4">
           {data1.map((datum) => {

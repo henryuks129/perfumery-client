@@ -1,92 +1,151 @@
-import React,{useState} from 'react';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import Header from '../Layouts/Header';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import '../styles/Signup.css';
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import Header from "../Layouts/Header";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import "../styles/Signup.css";
 
 const Signup = () => {
-  const [email,setEmail] = useState('')
-  const [firstname,setfirstname] = useState('')
-  const [lastname,setlastname] = useState('')
-  const [password,setpassword] = useState('')
-  const [passwordVerify,setpasswordVerify] = useState('')
-  const navigate = useNavigate()
+  const [email, setEmail] = useState("");
+  const [firstname, setfirstname] = useState("");
+  const [lastname, setlastname] = useState("");
+  const [password, setpassword] = useState("");
+  const [passwordVerify, setpasswordVerify] = useState("");
+  const navigate = useNavigate();
+  const [isAuthenticating, setIsAuthenticating] = useState(false)
 
- async function Register(e){
-  e.preventDefault()
-  // console.log(12);
-  try {
-    const regData = {
-      email,
-      firstname,
-      lastname,
-      password,
-      passwordVerify
+  //  function regsub(e){
+  //   e.preventDefault()
+  //   const regData = {
+  //     email,
+  //     firstname,
+  //     lastname,
+  //     password,
+  //     passwordVerify
+  //   }
+  //   // const res =  await axios.post('https://perfumery-server.onrender.com/auth/register',regData)
+  //   navigate('/Signin')
+
+  //   console.log(123);
+  // }
+
+  async function Register(e) {
+    e.preventDefault();
+    console.log(12);
+    setIsAuthenticating(true)
+    try {
+      const regData = {
+        email,
+        firstname,
+        lastname,
+        password,
+        passwordVerify,
+      };
+
+      // const { data } = await axios.post(
+      //   "https://perfumery-server.onrender.com/auth/register",
+      //   regData
+      // );
+      const {data} = await axios.post("https://perfumery-server.onrender.com/auth/register",regData)
+      // console.log(data);
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+        alert("registration completed");
+      }
+      navigate("/Signin");
+      setIsAuthenticating(false)
+    } catch (error) {
+      if (error) {
+        // alert(error.response.data.errMsg);
+      }
+      console.log(error);
     }
-
-  //   const res = await fetch('http://localhost:7878/auth/register',{method:"POST",
-  //   headers:{
-  //     "Content-type":"application/json"
-  //   },
-  //   body:JSON.stringify(regData)
-  // })
-  // const data = await res.json();
-  // console.log(data);
-    if(   !email ||
-      !firstname ||
-      !lastname ||
-      !password ||
-      !passwordVerify ){
-        alert('please fill all fields')
-
-    }
-    if(  email ||
-      firstname ||
-      lastname ||
-      password ||
-      passwordVerify ){
-        alert('registeration completed')
-        console.log('resgistration completed');
-
-    }
-
-   const res =  await axios.post('https://perfumery-server.onrender.com/auth/register',regData)
-   console.log(res);
-   navigate('/Signin')
-  } catch (error) {
-    console.log(error);
-    
-  }
-  
-
+    setIsAuthenticating(false)
   }
   return (
     <div>
+      <Header />
       <div className="container">
-      {/* <NavbarAccent /> */}
-      <form className="w-50 m-auto" >
-        <label htmlFor="email">Email:</label><br />
-        <input onChange={(e)=> setEmail(e.target.value) } value={email} className="w-100 rounded-pill border border-2 border-success" type="email" name="" id="email" /><br /><br />
-        <label htmlFor="firstname">Firstname:</label><br />
-        <input onChange={(e)=> setfirstname(e.target.value) }  value={firstname} className="w-100 rounded-pill border border-2 border-success"  type="text" name="" id="firstname" /><br /><br />
-        <label htmlFor="lastname">Lastname:</label><br />
-        <input onChange={(e)=> setlastname(e.target.value) }  value={lastname} className="w-100 rounded-pill border border-2 border-success"  type="text" name="" id="lastname" /><br /><br />
-        <label htmlFor="password">Password:</label><br />
-        <input onChange={(e)=> setpassword(e.target.value) }  value={password} className="w-100 rounded-pill border border-2 border-success"  type="password" name="" id="password" /><br /><br />
-        <label htmlFor="Verifypassword">Verify password:</label><br />
-        <input onChange={(e)=> setpasswordVerify(e.target.value) }  value={passwordVerify} className="w-100 rounded-pill border border-2 border-success"  type="password" name="" id="Verifypassword" /><br /><br />
-        <input className="btn btn-primary" type="submit" value="Register"  onSubmit={Register}/>
-      </form>
+        <form className="w-50 m-auto" onSubmit={(e)=>{
+          Register(e)
+          console.log('submitted');
 
+        }}>
+          <label htmlFor="email">Email:</label>
+          <br />
+          <input
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            className="w-100 rounded-pill border border-2 border-success"
+            type="email"
+            name=""
+            id="email"
+          />
+          <br />
+          <br />
+          <label htmlFor="firstname">Firstname:</label>
+          <br />
+          <input
+            onChange={(e) => setfirstname(e.target.value)}
+            value={firstname}
+            className="w-100 rounded-pill border border-2 border-success"
+            type="text"
+            name=""
+            id="firstname"
+          />
+          <br />
+          <br />
+          <label htmlFor="lastname">Lastname:</label>
+          <br />
+          <input
+            onChange={(e) => setlastname(e.target.value)}
+            value={lastname}
+            className="w-100 rounded-pill border border-2 border-success"
+            type="text"
+            name=""
+            id="lastname"
+          />
+          <br />
+          <br />
+          <label htmlFor="password">Password:</label>
+          <br />
+          <input
+            onChange={(e) => setpassword(e.target.value)}
+            value={password}
+            className="w-100 rounded-pill border border-2 border-success"
+            type="password"
+            name=""
+            id="password"
+          />
+          <br />
+          <br />
+          <label htmlFor="Verifypassword">Verify password:</label>
+          <br />
+          <input
+            onChange={(e) => setpasswordVerify(e.target.value)}
+            value={passwordVerify}
+            className="w-100 rounded-pill border border-2 border-success"
+            type="password"
+            name=""
+            id="Verifypassword"
+          />
+          <br />
+          <br />
+          {isAuthenticating ? <span className="spinner"></span> : <input
+            className="btn btn-primary"
+            type="submit"
+            value="Register"
+          />}
+          {/* <button onClick={regsub}>regsubmit</button> */}
+        </form>
+      </div>
     </div>
-    </div>
-  )
-}
+  );
+};
 
-export default Signup
+export default Signup;
 
 // const Schema = yup.object().shape({
 //   firstName: yup.string().required(),
@@ -127,7 +186,7 @@ export default Signup
 //       <label htmlFor='email' className=''>Email</label><br/>
 //       <input type='email' id='email' name='Email' onChange={(e)=>e.target.value} {...register('Email', {required: true})} placeholder='Placeholder' className='input-body'/>
 //       {errors.Email && <p>Email is required.</p>}<br/><br/>
-//       <label htmlFor="firstName" className=''>First Name</label><br/>  
+//       <label htmlFor="firstName" className=''>First Name</label><br/>
 //       <input type='text' id='firstName' name='firstName' onChange={(e)=>e.target.value} {...register('firstName', { required: true })} placeholder='Placeholder' className='input-body'/>
 //       {errors.firstName && <p>First Name is required.</p>}<br/><br/>
 //       <label htmlFor="lastName" className=''>Last Name</label><br/>

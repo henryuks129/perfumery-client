@@ -32,7 +32,7 @@ const ComboPackageCategory = () => {
                         <img src={arrow} alt="" />
                     </div>
                 </div>
-                {loading3 && <ClipLoader color={'teal'} size={'300'}/>}
+                {loading3 && <ClipLoader color={'teal'} size={'150'}/>}
                     {error3 && <h2>{error3.message}</h2>}
                 <div className='mapped-data-container shadow p-4'>
                 {data3.map((datum)=>{
@@ -55,10 +55,7 @@ const ComboPackageCategory = () => {
                                     <p className='pt-3'>50 Reviews</p>
                                 </div>
                                 <div className='d-flex justify-content-between mb-2'>
-                                    <button className='rounded-pill buy-btn' onClick={() => {
-                        handleAddToCart(datum);
-                        notify();
-                      }}>Buy Now</button>
+                                    <button className='rounded-pill buy-btn' onClick={() =>{handleAddToCart(datum); notify();}}>Buy Now</button>
                                     <ToastContainer />
                                     <img src={cart} alt="" />
                                 </div>

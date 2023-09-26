@@ -49,7 +49,7 @@ const Footer = () => {
             <img src={promotionimage} alt="" />
           </div>
         </div>
-          <div className='text-center'>
+          <div className='text-center pb-2 pt-1'>
             <p>Copyright &copy; {year} <span>Fame Perfumery</span>. All Rights Reserved.</p>
           </div>
       </div>

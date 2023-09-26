@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useContext} from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
@@ -6,6 +6,7 @@ import * as yup from 'yup';
 import Header from '../Layouts/Header';
 import '../styles/Signin.css';
 import axios from 'axios';
+import CartContext from '../Hooks/CartContext';
 
 // const Schema = yup.object().shape({
 //   Email: yup.string().email().required(),
@@ -13,10 +14,12 @@ import axios from 'axios';
 // }
 
 const Signin = () => {
+  const {setLoggedIn} = useContext(CartContext)
   const [email,setEmail] = useState('')
   const [password,setpassword] = useState('')
   const navigate = useNavigate()
   // http://localhost:7878/auth/login
+
 
   const Login = async (e)=>{
     e.preventDefault()
@@ -24,40 +27,62 @@ const Signin = () => {
       email,
       password,
     }
-
     if( !email || !password ){
         alert('please fill all fields')
       }
     if(  email ||password ){
         alert('logged in')
-
     }
     try {
-      const res =  await axios.post('http://localhost:7878/auth/login',logData)
-      navigate('/')
-      
+      const {data} =  await axios.post('https://perfumery-server.onrender.com/auth/login',logData)
+      console.log(data);
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+        // alert("registration completed");
+        setLoggedIn(true)
+        navigate('/')
+      }
+    
     } catch (error) {
-      console.log(error);
-      
+      if (error) {
+        alert(error.response.data.errMsg);
+      }
+      console.log(error);      
     }
-
-  }
-    <div>
+  }  
   return (
     <div>
-      {/* <NavbarAccent /> */}
-      <form className="w-50 m-auto" >
-        <label htmlFor="email">Email:</label><br />
-        <input onChange={(e)=> setEmail(e.target.value) } value={email} className="w-100 rounded-pill border border-2 border-success" type="email" name="" id="email" /><br /><br />
-        <label htmlFor="password">Password:</label><br />
-        <input onChange={(e)=> setpassword(e.target.value) }  value={password} className="w-100 rounded-pill border border-2 border-success"  type="password" name="" id="password" /><br /><br />
-      
-        <input className="btn btn-primary" type="submit" value="Register" onClick={Login}/>
+      <Header/>
+      <form className="w-50 m-auto" onSubmit={(e)=>{
+        Login(e)
+        console.log('submitted');
+
+      }} >
+      <label htmlFor="email">Email:</label>
+          <br />
+          <input
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            className="w-100 rounded-pill border border-2 border-success"
+            type="email"
+            name=""
+            id="email"
+          /><br/>
+        <label htmlFor="password">Password:</label>
+          <br />
+          <input
+            onChange={(e) => setpassword(e.target.value)}
+            value={password}
+            className="w-100 rounded-pill border border-2 border-success"
+            type="password"
+            name=""
+            id="password"
+          /><br/>      
+        <input className="btn btn-primary" type="submit" value="Register" />
       </form>
-  
     </div>
   );
-    </div>
+  
 
 }
 
